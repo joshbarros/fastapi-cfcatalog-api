@@ -1,0 +1,35 @@
+{
+  "name": "cfcatalog-postgres-source",
+  "config": {
+    "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+    "tasks.max": "1",
+
+    "database.hostname": "db",
+    "database.port": "5432",
+    "database.user": "cfcatalog",
+    "database.password": "cfcatalog",
+    "database.dbname": "cfcatalog",
+
+    "topic.prefix": "cfcatalog",
+    "plugin.name": "pgoutput",
+    "slot.name": "cfcatalog_slot",
+    "publication.name": "cfcatalog_publication",
+    "publication.autocreate.mode": "filtered",
+
+    "schema.include.list": "public",
+    "table.include.list": "public.videos,public.categories,public.genres,public.cast_members",
+
+    "snapshot.mode": "initial",
+    "tombstones.on.delete": "true",
+
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": "false",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": "false",
+
+    "transforms": "unwrap",
+    "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "transforms.unwrap.drop.tombstones": "false",
+    "transforms.unwrap.delete.handling.mode": "rewrite"
+  }
+}
