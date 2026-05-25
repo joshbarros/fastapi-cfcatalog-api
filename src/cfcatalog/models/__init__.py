@@ -2,7 +2,7 @@ from cfcatalog.models.base import Base
 from cfcatalog.models.cast_member import CastMember, CastMemberType
 from cfcatalog.models.category import Category
 from cfcatalog.models.genre import Genre
-from cfcatalog.models.video import Rating, Video
+from cfcatalog.models.title import Rating, Title, TitleType
 
 __all__ = [
     "Base",
@@ -11,5 +11,6 @@ __all__ = [
     "Category",
     "Genre",
     "Rating",
-    "Video",
+    "Title",
+    "TitleType",
 ]

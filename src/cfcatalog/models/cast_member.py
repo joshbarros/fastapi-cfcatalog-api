@@ -4,11 +4,11 @@ from typing import TYPE_CHECKING
 from sqlalchemy import Enum, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from cfcatalog.models.associations import video_cast_member_association
+from cfcatalog.models.associations import title_cast_member_association
 from cfcatalog.models.base import Base
 
 if TYPE_CHECKING:
-    from cfcatalog.models.video import Video
+    from cfcatalog.models.title import Title
 
 
 class CastMemberType(enum.StrEnum):
@@ -25,8 +25,8 @@ class CastMember(Base):
         nullable=False,
     )
 
-    videos: Mapped[list["Video"]] = relationship(
-        secondary=video_cast_member_association,
+    titles: Mapped[list["Title"]] = relationship(
+        secondary=title_cast_member_association,
         back_populates="cast_members",
         lazy="selectin",
     )

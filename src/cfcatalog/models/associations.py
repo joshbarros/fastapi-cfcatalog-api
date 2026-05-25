@@ -21,23 +21,23 @@ genre_category_association = Table(
     _uuid_fk_column("category_id", "categories"),
 )
 
-video_category_association = Table(
-    "video_category",
+title_category_association = Table(
+    "title_category",
     Base.metadata,
-    _uuid_fk_column("video_id", "videos"),
+    _uuid_fk_column("title_id", "titles"),
     _uuid_fk_column("category_id", "categories"),
 )
 
-video_genre_association = Table(
-    "video_genre",
+title_genre_association = Table(
+    "title_genre",
     Base.metadata,
-    _uuid_fk_column("video_id", "videos"),
+    _uuid_fk_column("title_id", "titles"),
     _uuid_fk_column("genre_id", "genres"),
 )
 
-video_cast_member_association = Table(
-    "video_cast_member",
+title_cast_member_association = Table(
+    "title_cast_member",
     Base.metadata,
-    _uuid_fk_column("video_id", "videos"),
+    _uuid_fk_column("title_id", "titles"),
     _uuid_fk_column("cast_member_id", "cast_members"),
 )

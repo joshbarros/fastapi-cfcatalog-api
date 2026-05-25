@@ -8,7 +8,7 @@ from cfcatalog.core.database import get_session
 from cfcatalog.services.cast_member import CastMemberService
 from cfcatalog.services.category import CategoryService
 from cfcatalog.services.genre import GenreService
-from cfcatalog.services.video import VideoService
+from cfcatalog.services.title import TitleService
 
 
 async def session_dep() -> AsyncIterator[AsyncSession]:
@@ -31,11 +31,11 @@ def get_cast_member_service(session: SessionDep) -> CastMemberService:
     return CastMemberService(session)
 
 
-def get_video_service(session: SessionDep) -> VideoService:
-    return VideoService(session)
+def get_title_service(session: SessionDep) -> TitleService:
+    return TitleService(session)
 
 
 CategoryServiceDep = Annotated[CategoryService, Depends(get_category_service)]
 GenreServiceDep = Annotated[GenreService, Depends(get_genre_service)]
 CastMemberServiceDep = Annotated[CastMemberService, Depends(get_cast_member_service)]
-VideoServiceDep = Annotated[VideoService, Depends(get_video_service)]
+TitleServiceDep = Annotated[TitleService, Depends(get_title_service)]

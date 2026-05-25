@@ -5,13 +5,13 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from cfcatalog.models.associations import (
     genre_category_association,
-    video_category_association,
+    title_category_association,
 )
 from cfcatalog.models.base import Base
 
 if TYPE_CHECKING:
     from cfcatalog.models.genre import Genre
-    from cfcatalog.models.video import Video
+    from cfcatalog.models.title import Title
 
 
 class Category(Base):
@@ -26,8 +26,8 @@ class Category(Base):
         back_populates="categories",
         lazy="selectin",
     )
-    videos: Mapped[list["Video"]] = relationship(
-        secondary=video_category_association,
+    titles: Mapped[list["Title"]] = relationship(
+        secondary=title_category_association,
         back_populates="categories",
         lazy="selectin",
     )

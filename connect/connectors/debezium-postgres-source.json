@@ -17,7 +17,7 @@
     "publication.autocreate.mode": "filtered",
 
     "schema.include.list": "public",
-    "table.include.list": "public.videos,public.categories,public.genres,public.cast_members",
+    "table.include.list": "public.titles,public.categories,public.genres,public.cast_members",
 
     "snapshot.mode": "initial",
     "tombstones.on.delete": "true",

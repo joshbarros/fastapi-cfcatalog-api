@@ -98,8 +98,15 @@ All routes live under `/api/v1`:
 | Categories   | `/categories`         |
 | Genres       | `/genres`             |
 | Cast members | `/cast-members`       |
-| Videos       | `/videos`             |
+| Titles       | `/titles`             |
 | Health       | `/health` (unversioned) |
+
+`Title` is a polymorphic aggregate with `type ∈ {MOVIE, SERIES, SEASON, EPISODE, SUPPLEMENTAL}` and an optional self-referential `parent_id`. Hierarchy rules are enforced by the service layer:
+
+- `MOVIE` / `SERIES`: no parent, no season/episode number
+- `SEASON`: parent must be a `SERIES`, requires `season_number`
+- `EPISODE`: parent must be a `SEASON`, requires `episode_number` and `duration_seconds`
+- `SUPPLEMENTAL`: any non-supplemental parent (trailers, bonus content, behind-the-scenes)
 
 Each resource supports the standard `POST`, `GET (list)`, `GET (by id)`,
 `PATCH`, and `DELETE` verbs.
@@ -167,7 +174,7 @@ curl http://localhost:9200/cfcatalog_videos/_search?pretty
 
 - [`connect/connectors/debezium-postgres-source.json`](connect/connectors/debezium-postgres-source.json)
   — uses the `pgoutput` plugin (no Postgres extension needed), captures
-  `videos`, `categories`, `genres`, `cast_members`, and applies the
+  `titles`, `categories`, `genres`, `cast_members`, and applies the
   `ExtractNewRecordState` SMT so downstream sees flat row payloads instead of
   full Debezium envelopes.
 - [`connect/connectors/elasticsearch-sink.json`](connect/connectors/elasticsearch-sink.json)
